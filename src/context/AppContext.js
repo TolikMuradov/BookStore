@@ -1,13 +1,17 @@
 import React, { createContext, useReducer } from 'react';
-import booksData, { categories as categoriesData } from '../data';
+import booksData, { categories as categoriesData, banners as bannersData } from '../data';
+
+
 
 const AppContext = createContext();
 
 const initialState = {
-  books: booksData,
-  categories: categoriesData,
-  favorites: [], // Kullanıcının favorileri
-};
+    books: booksData || [], // Eğer booksData undefined ise boş bir dizi
+    categories: categoriesData || [],
+    banners: bannersData || [],
+    favorites: [],
+  };
+
 
 const reducer = (state, action) => {
   switch (action.type) {

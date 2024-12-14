@@ -39,7 +39,7 @@ function TabNavigator() {
           } else if (route.name === 'Library') {
             iconName = focused ? 'book' : 'book-outline';
           } else if (route.name === 'Notifications') {
-            iconName = focused ? 'notifications' : '  -outline';
+            iconName = focused ? 'notifications' : 'notifications-outline';
           }
 
           // Ionicons bileşenini döndür
