@@ -27,12 +27,12 @@ const ChapterList = ({ chapters }) => {
 
             <View style={styles.statsContainer}>
               <View style={styles.statItem}>
-                <Ionicons name="chatbubble" size={16} color={theme.colors.textSecondary} />
+                <Ionicons name="chatbox-outline" size={16} color={theme.colors.textSecondary} />
                 <Text style={styles.statText}>{item.comments?.length || 0} Comments</Text>
               </View>
 
               <View style={styles.statItem}>
-                <Ionicons name="eye" size={16} color={theme.colors.textSecondary} />
+                <Ionicons name="eye-outline" size={16} color={theme.colors.textSecondary} />
                 <Text style={styles.statText}>{item.views || 0} Views</Text>
               </View>
             </View>

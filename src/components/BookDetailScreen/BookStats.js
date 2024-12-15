@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import theme from '../../theme';
+import { Ionicons } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
 
@@ -24,19 +25,34 @@ const BookCoverStats = ({ book }) => {
       {/* İstatistikler */}
       <View style={styles.statsContainer}>
         <View style={styles.statItem}>
+            <View style={styles.yan}>
+          <Ionicons name="star" size={16} color={theme.colors.textSecondary}/>
           <Text style={styles.statValue}>{book.rating}</Text>
+            </View>
           <Text style={styles.statLabel}>Rating</Text>
         </View>
+        <View style={styles.sep}></View>
         <View style={styles.statItem}>
-          <Text style={styles.statValue}>{book.chapters.length}</Text>
+            <View style={styles.yan}>
+                <Ionicons name="list-outline" size={16} color={theme.colors.textSecondary}/>
+                <Text style={styles.statValue}>{book.chapters.length}</Text>
+            </View>
           <Text style={styles.statLabel}>Chapters</Text>
         </View>
+        <View style={styles.sep}></View>
         <View style={styles.statItem}>
-          <Text style={styles.statValue}>{book.views}</Text>
+            <View style={styles.yan}>
+                <Ionicons name="eye" size={16} color={theme.colors.textSecondary}/>
+                <Text style={styles.statValue}>{book.views}</Text>
+            </View>
           <Text style={styles.statLabel}>Views</Text>
         </View>
+        <View style={styles.sep}></View>
         <View style={styles.statItem}>
-          <Text style={styles.statValue}>{book.likes}</Text>
+            <View style={styles.yan}>
+                <Ionicons name="heart" size={16} color={theme.colors.textSecondary}/>
+                <Text style={styles.statValue}>{book.likes}</Text>
+            </View>
           <Text style={styles.statLabel}>Likes</Text>
         </View>
       </View>
@@ -56,6 +72,8 @@ const styles = StyleSheet.create({
     height: '100%',
     position: 'absolute',
     resizeMode: 'cover',
+    borderBottomLeftRadius: 70,
+    borderBottomRightRadius: 70,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
@@ -97,11 +115,21 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSizes.medium,
     color: theme.colors.text,
     fontWeight: 'bold',
+    marginStart: theme.spacing.small,
   },
   statLabel: {
     fontSize: theme.fontSizes.small,
     color: theme.colors.textSecondary,
   },
+  sep: {
+    width: 1,
+    height: '100%',
+    backgroundColor: theme.colors.textSecondary,
+  },
+  yan: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  }
 });
 
 export default BookCoverStats;
