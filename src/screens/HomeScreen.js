@@ -7,7 +7,7 @@ import theme from '../theme';
 import PopularBooks from '../components/HomeScreen/PopularBooks';
 import Header from '../components/HomeScreen/Header';
 import Banner from '../components/HomeScreen/Banner';
-
+import RecommendedBooks from '../components/HomeScreen/Recommended';
 const HomeScreen = () => {
   const { state } = useContext(AppContext);
 
@@ -17,6 +17,7 @@ const HomeScreen = () => {
       <Header username="John Doe" profileImage="https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_1280.png" />
       <Banner banners={state.banners} />
       <PopularBooks books={state.books} />
+      <RecommendedBooks books={state.books} />
     </ScrollView>
     </SafeAreaView>
   );
@@ -27,5 +28,6 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
   },
 });
+
 
 export default HomeScreen;

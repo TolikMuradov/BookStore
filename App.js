@@ -70,7 +70,7 @@ export default function App() {
     barStyle=" dark-content" // Metin ve ikonlar için açık renk
   />
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="MainTabs"
           component={TabNavigator}

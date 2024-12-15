@@ -1,14 +1,19 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import theme from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const PopularBooks = ({ books }) => {
-  // Popülerlik sıralaması
+  const navigation = useNavigation();
+
   const popularBooks = books
     .sort((a, b) => b.popularityScore - a.popularityScore) // Popülerlik skoruna göre sırala
     .slice(0, 10); // İlk 10 kitabı seç
- // Test için
+
+  const handleBookPress = (bookId) => {
+    navigation.navigate('BookDetails', { id: bookId });
+  };
 
   return (
     <View style={styles.container}>
@@ -22,18 +27,20 @@ const PopularBooks = ({ books }) => {
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View style={styles.card}>
-              <Image source={{ uri: item.coverImage }} style={styles.image} />
-              <Text style={styles.bookTitle} numberOfLines={1} ellipsizeMode='tail'>{item.title}</Text>
-              <View style={styles.ratingContainer}>
-                <Text style={styles.category}>{item.category}</Text>
-                <View style={styles.rating}>
+            <TouchableOpacity onPress={() => handleBookPress(item.id)}>
+              <View style={styles.card}>
+                <Image source={{ uri: item.coverImage }} style={styles.image} />
+                <Text style={styles.bookTitle} numberOfLines={1} ellipsizeMode='tail'>{item.title}</Text>
+                <View style={styles.ratingContainer}>
+                  <Text style={styles.category}>{item.category}</Text>
+                  <View style={styles.rating}>
                     <Ionicons name="heart" size={13} color={theme.colors.main} />
                     <Text style={styles.ratingText}>{item.rating}</Text>
+                  </View>
                 </View>
+                <Text style={styles.bookAuthor}>{item.author} </Text>
               </View>
-              <Text style={styles.bookAuthor}>{item.author} </Text>
-            </View>
+            </TouchableOpacity>
           )}
         />
       )}
