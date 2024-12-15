@@ -4,13 +4,15 @@ import { Ionicons } from '@expo/vector-icons';
 import theme from '../../theme';
 import { useNavigation } from '@react-navigation/native';
 
-const StickyFooterBar = ({ lastReadChapter }) => {
+const StickyFooterBar = ({ lastReadChapter, bookId }) => {
   const navigation = useNavigation();
 
   const handleReadPress = () => {
-    navigation.navigate('ReadChapter', { chapterId: lastReadChapter });
+    console.log('Navigating to chapterId:', lastReadChapter, 'Book ID:', bookId);
+    navigation.navigate('ReadChapter', { chapterId: lastReadChapter, bookId });
   };
-
+ 
+  
   return (
     <View style={styles.footerContainer}>
       <View style={styles.leftButtonsContainer}>

@@ -4,11 +4,10 @@ import { Picker } from '@react-native-picker/picker';
 import ChapterList from './Chapterlist';
 import theme from '../../theme';
 
-const ChapterDropdown = ({ chapters }) => {
-  const groupSize = 10; // Her grup 10 chapter içerecek
+const ChapterDropdown = ({ chapters, bookId }) => { // bookId prop'u alınıyor
+  const groupSize = 10;
   const [selectedGroup, setSelectedGroup] = useState(0);
 
-  // Chapter'ları gruplandırma
   const groupChapters = (chapters, groupSize) => {
     const groups = [];
     for (let i = 0; i < chapters.length; i += groupSize) {
@@ -21,13 +20,12 @@ const ChapterDropdown = ({ chapters }) => {
 
   return (
     <View style={styles.container}>
-      {/* Dropdown Picker */}
       <Picker
         selectedValue={selectedGroup}
         onValueChange={(itemValue) => setSelectedGroup(itemValue)}
         style={styles.picker}
-        itemStyle={styles.pickerItem} // iOS yazı rengini kontrol eder
-        mode="dropdown" // iOS için dropdown görünümü sağlar
+        itemStyle={styles.pickerItem}
+        mode="dropdown"
       >
         {chapterGroups.map((_, index) => (
           <Picker.Item
@@ -38,23 +36,26 @@ const ChapterDropdown = ({ chapters }) => {
         ))}
       </Picker>
 
-      {/* Seçilen grup */}
-      <ChapterList chapters={chapterGroups[selectedGroup]} />
+      <ChapterList
+        chapters={chapterGroups[selectedGroup]}
+        bookId={bookId} // bookId burada iletiliyor
+      />
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.background,
-    padding: theme.spacing.medium,
+    paddingHorizontal: theme.spacing.medium,
   },
   picker: {
     backgroundColor: theme.colors.surface,
-    color: theme.colors.text, // Android yazı rengini kontrol eder
-    
-    marginVertical: -10, // Dikey marginleri sıfırlar
+    color: theme.colors.text,
+    marginBottom: theme.spacing.medium,
+    borderRadius: 8, // Android için köşe yumuşatma
   },
   pickerItem: {
     color: theme.colors.text, // iOS yazı rengini kontrol eder

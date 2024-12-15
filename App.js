@@ -65,10 +65,7 @@ function TabNavigator() {
 export default function App() {
   return (
     <AppProvider>
-    <StatusBar
-    backgroundColor={theme.colors.background} // Durum çubuğu arka planı
-    barStyle=" dark-content" // Metin ve ikonlar için açık renk
-  />
+    <StatusBar style="dark" backgroundColor={theme.colors.background} />
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen

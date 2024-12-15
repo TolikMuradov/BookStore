@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
     height: '100%',
     position: 'absolute',
     resizeMode: 'cover',
-    borderBottomLeftRadius: 70,
-    borderBottomRightRadius: 70,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,

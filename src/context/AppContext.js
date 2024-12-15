@@ -33,6 +33,7 @@ const reducer = (state, action) => {
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}

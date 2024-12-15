@@ -4,11 +4,12 @@ import theme from '../../theme';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-const ChapterList = ({ chapters }) => {
+const ChapterList = ({ chapters, bookId }) => {
   const navigation = useNavigation();
 
   const handleChapterPress = (chapterId) => {
-    navigation.navigate('ReadChapter', { chapterId });
+    console.log('Navigating to chapterId:', chapterId, 'Book ID:', bookId);
+    navigation.navigate('ReadChapter', { chapterId, bookId }); // bookId'yi ekledik
   };
 
   const renderChapter = ({ item, index }) => {

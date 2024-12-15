@@ -11,7 +11,8 @@ import StickyFooterBar from '../components/BookDetailScreen/StickyFooterBar';
 import ChapterDropdown from '../components/BookDetailScreen/ChapterDropdown';
 
 const BookDetailScreen = ({ navigation, route }) => {
-  const { id } = route.params;
+
+  const { id } = route.params || {};
   const { state } = React.useContext(AppContext);
 
   const [headerBackground, setHeaderBackground] = useState('transparent');
@@ -32,6 +33,10 @@ const BookDetailScreen = ({ navigation, route }) => {
     );
   }
 
+  const handleChapterSelect = (chapterIndex) => {
+    navigation.navigate('ReadChapter', { id: book.id, chapterIndex });
+  };
+
   return (
     <View style={styles.container}>
       {/* Header Component */}
@@ -44,7 +49,7 @@ const BookDetailScreen = ({ navigation, route }) => {
           <>
             <BookStats book={book} />
             <Description description={book.description} />
-            <ChapterDropdown chapters={book.chapters} />
+            <ChapterDropdown chapters={book.chapters} onChapterSelect={handleChapterSelect} bookId={book.id} />
           </>
         )}
         keyExtractor={(item, index) => index.toString()}
@@ -54,7 +59,11 @@ const BookDetailScreen = ({ navigation, route }) => {
       />
 
       {/* Sticky Footer */}
-      <StickyFooterBar style={styles.footer} lastReadChapter={book.lastReadChapter || 1} />
+      <StickyFooterBar
+  style={styles.footer}
+  lastReadChapter={book.lastReadChapter || 1}
+  bookId={book.id}
+/>
     </View>
   );
 };
