@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, FlatList } from 'react-native';
 import AppContext from '../context/AppContext';
 import theme from '../theme';
 
@@ -8,6 +8,7 @@ import BookDetailHeader from '../components/BookDetailScreen/Header';
 import BookStats from '../components/BookDetailScreen/BookStats';
 import Description from '../components/BookDetailScreen/Description';
 import StickyFooterBar from '../components/BookDetailScreen/StickyFooterBar';
+import ChapterDropdown from '../components/BookDetailScreen/ChapterDropdown';
 
 const BookDetailScreen = ({ navigation, route }) => {
   const { id } = route.params;
@@ -36,20 +37,24 @@ const BookDetailScreen = ({ navigation, route }) => {
       {/* Header Component */}
       <BookDetailHeader navigation={navigation} backgroundColor={headerBackground} />
 
-      {/* Content with Scroll */}
-      <View style={styles.contentContainer}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          onScroll={handleScroll}
-          scrollEventThrottle={16} // Performant scrolling
-        >
-          <BookStats book={book} />
-          <Description description={book.description} />
-        </ScrollView>
-      </View>
+      {/* Content with FlatList */}
+      <FlatList
+        data={[{ key: 'content' }]} // Sadece bir öğe içeriyor
+        renderItem={() => (
+          <>
+            <BookStats book={book} />
+            <Description description={book.description} />
+            <ChapterDropdown chapters={book.chapters} />
+          </>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+        onScroll={handleScroll}
+        scrollEventThrottle={16} // Performant scrolling
+        contentContainerStyle={styles.scrollContent}
+      />
 
       {/* Sticky Footer */}
-      <StickyFooterBar lastReadChapter={book.lastReadChapter || 1} />
+      <StickyFooterBar style={styles.footer} lastReadChapter={book.lastReadChapter || 1} />
     </View>
   );
 };
@@ -59,12 +64,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.background,
   },
-  contentContainer: {
-    flex: 1, // Scrollable content takes up all available space
-    marginBottom: 0, // Leave space for the footer
-  },
   scrollContent: {
     paddingBottom: theme.spacing.large, // Add padding for smooth scrolling
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    backgroundColor: theme.colors.background,
+    elevation: 5, // For Android shadow
+    shadowColor: '#000', // For iOS shadow
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
 });
 
